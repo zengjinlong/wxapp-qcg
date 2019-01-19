@@ -60,24 +60,32 @@
                                 </view>
                             </view>
 
-                            <view class="item-footer">
-                                <view class="zan">
-                                    <image src="../../assets/images/community/zan.png" mode="scaleToFill"
-                                      lazy-load="false">
-                                    </image>
-                                    <text>{{tabItem.like}}</text>
+                            <view class="item-footer-con">
+                                <view  class="item-footer">
+                                    <view class="zan">
+                                        <image src="../../assets/images/community/zan.png" mode="scaleToFill"
+                                        lazy-load="false">
+                                        </image>
+                                        <text>{{tabItem.like}}</text>
+                                    </view>
+                                    <view class="comment">
+                                        <image src="../../assets/images/community/comment.png" mode="scaleToFill"
+                                        lazy-load="false">
+                                        </image>
+                                        <text>{{tabItem.commentsNum}}</text>
+                                    </view>
+                                    <view class="share">
+                                        <image src="../../assets/images/community/share.png" mode="scaleToFill"
+                                        lazy-load="false">
+                                        </image>
+                                        <text>分享</text>
+                                    </view>
                                 </view>
-                                <view class="comment">
-                                    <image src="../../assets/images/community/comment.png" mode="scaleToFill"
-                                      lazy-load="false">
-                                    </image>
-                                    <text>{{tabItem.commentsNum}}</text>
-                                </view>
-                                <view class="share">
-                                    <image src="../../assets/images/community/share.png" mode="scaleToFill"
-                                      lazy-load="false">
-                                    </image>
-                                    <text>分享</text>
+                                <view class="comments-con">
+                                    <view class="comments-con-avatar"></view>
+                                    <view class="comments-content">
+                                        <text class="comments-title">查看所有评论(0)</text>
+                                    </view>
                                 </view>
                             </view>
                         </view>
@@ -278,32 +286,50 @@ page {
           }
 
       }
-      .item-footer{
-          display: inline-flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-          padding:10rpx 0;
-          margin-top: 20rpx;
-          border-top:1rpx solid #bfbfbf;
-          border-bottom:1rpx solid #bfbfbf;
-          .zan,.comment,.share{
-             display: flex;
-             justify-content: center;
-              align-items: center;
-              font-size: 28rpx;
-              color:#bfbfbf;
-              width: 32%;
-              image{
-                  width: 32rpx;
-                  height: 32rpx;
-                  margin-right:10rpx;
-              }
-          }
-          .comment{
-              border-left: 1rpx solid #bfbfbf;
-              border-right:1rpx solid #bfbfbf
-          }
+      .item-footer-con{
+        .item-footer{
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding:10rpx 0;
+            margin-top: 20rpx;
+            border-top:1rpx solid #bfbfbf;
+            border-bottom:1rpx solid #bfbfbf;
+            .zan,.comment,.share{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 28rpx;
+                color:#bfbfbf;
+                width: 32%;
+                image{
+                    width: 32rpx;
+                    height: 32rpx;
+                    margin-right:10rpx;
+                }
+            }
+            .comment{
+                border-left: 1rpx solid #bfbfbf;
+                border-right:1rpx solid #bfbfbf
+            }
+
+        }
+        .comments-con{
+            .comments-con-avatar{} 
+            .comments-content{
+                border-bottom: 1rpx solid #999;
+                text-align: center;
+                .comments-title{
+                    display: inline-block;
+                    padding:10rpx 0 ;
+                    
+                    font-size: 28rpx;
+                    color:#999;
+                }
+            }
+            
+        }
       }
   }
 }
