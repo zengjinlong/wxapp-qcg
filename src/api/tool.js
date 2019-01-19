@@ -1,4 +1,4 @@
-import CryptoJS from '../assets/js/crypto-js';
+import CryptoJS from 'crypto-js';
 export default{
      encrypt:(message, key)=> {
         var keyHex = CryptoJS.enc.Utf8.parse(key);

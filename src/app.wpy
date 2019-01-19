@@ -8,7 +8,7 @@ page{
 <script>
 import wepy from 'wepy';
 import 'wepy-async-function';
-
+import {baseUrl} from '@/api/api';
 export default class extends wepy.app {
   config = {
     pages: [
@@ -67,8 +67,47 @@ export default class extends wepy.app {
   };
 
   constructor() {
+    // this is not allowed before super()
     super();
     this.use('requestfix');
+    this.use('promisify');
+    // 拦截request请求
+    this.intercept('request', {
+      // 发出请求时的回调函数
+      config(p) {
+        wx.showLoading({
+          title: '加载中'
+        });
+        // 对所有request请求中的OBJECT参数对象统一附加时间戳属性
+        p.timestamp = +new Date();
+        // 对所有通过 wepy.request 的请求添加 api base url
+        if (p.url.indexOf('http')===-1) {
+           p.url = baseUrl + p.url;
+        }
+        // 必须返回OBJECT参数对象，否则无法发送请求到服务端
+        return p;
+      },
+
+      // 请求成功后的回调函数
+      success(p) {
+        wx.hideLoading();
+        const accessToken = wepy.getStorageSync('X-Access-Token');
+        // 可以在这里对收到的响应数据对象进行加工处理
+        // 必须返回响应数据对象，否则后续无法对响应数据进行处理
+        return p;
+      },
+
+      //请求失败后的回调函数
+      fail(p) {
+        // 必须返回响应数据对象，否则后续无法对响应数据进行处理
+        return p;
+      },
+
+      // 请求完成时的回调函数(请求成功或失败都会被执行)
+      complete(p) {
+        console.log('request complete: ', p);
+      }
+    });
   }
 
   onLaunch() {
