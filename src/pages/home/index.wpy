@@ -1,0 +1,508 @@
+<template lang="wxml">
+    <view class="container">
+      <view class="banner">
+        <image class="banner-bg" src="{{bannerBgUrl}}" mode="scaleToFill"
+          lazy-load="false">
+        </image>
+        <view class="banner-head">
+          <view class="logo">
+            <image class="logo-img" src="{{logo}}" mode="scaleToFill"
+              lazy-load="false">
+            </image>
+          </view>
+          <view class="search">
+            <image class="search-icon" src="../../assets/images/home/search.png" mode="scaleToFill"
+              lazy-load="false">
+            </image>
+            <input class="search-input" value="" type="text" placeholder="搜索" placeholder-style="font-size:26rpx;"
+              maxlength="140" @blur=""> 
+            </input>
+          </view>
+        </view>
+      </view>
+      <!-- =========================================== -->
+      <view class="body">
+        <view class="body-head">
+          <view class="head-nav">
+            <repeat for="{{navList}}" key="index" index="index" item="item">
+              <view class="nav-item">
+                <image src="{{item.iconUrl}}" mode="scaleToFill"
+                  lazy-load="false">
+                </image>
+                <text>{{item.title}}</text>
+              </view>
+            </repeat>
+          </view>
+        </view>
+
+        <view class="menu">
+          <repeat for="{{menuList}}" key="index" index="index" item="item">
+            <view class="menu-item">
+              <image class="menu-bg" src="{{item.bgUrl}}" mode="scaleToFill" lazy-load="false"></image>
+              <view class="menu-content">
+                <view class="title">{{item.title}}</view>
+                <view class="value">库存：{{item.value}}</view>
+              </view>
+            </view>
+          </repeat>
+        </view>
+        <!-- 预告推荐 -->
+        <view class="recommend">
+          <view class="recommend-title">
+            推荐预告
+          </view>
+          <view class="recommend-content">
+            <view class="image1">
+              <image class="image1-left" src="../../assets/images/2.jpeg" mode="scaleToFill" lazy-load="false"></image>
+               <view class="image1-right">
+                  <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+                    lazy-load="false">
+                  </image>
+                  <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+                    lazy-load="false">
+                  </image>
+                </view>
+            </view>
+
+            <view class="image2">
+              <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+                lazy-load="false">
+              </image>
+            </view>
+
+            <view class="image3">
+              <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+                lazy-load="false">
+              </image>
+              <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+                lazy-load="false">
+              </image>
+            </view>
+          </view>
+          <!-- ================= -->
+          <!-- 爆款推荐 -->
+          <view class="hot-recommend">
+            <view class="hot-recommend-head">
+              <image src="../../assets/images/home/recommendIcon.png" mode="scaleToFill"
+              lazy-load="false">
+              </image>
+              <text>爆款推荐</text>
+            </view>
+            <!-- ------------ -->
+           
+            <view class="hot-recommend-body">
+               <repeat for="{{recommendItem}}" key="index" index="index" item="item">
+              <view class="hot-recommend-item" style="{{index%2===0?'float:left;':'float:right'}}">
+                <view class="photo">
+                  <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+                    lazy-load="false">
+                  </image>
+                  <view class="photo-des">
+                    hah
+                  </view>
+                </view>
+                <view class="price">
+                  <text>整单总价</text>
+                  <text class="price-num">￥1.20万</text>
+                </view>
+                <view class="dis-price">
+                  <text class="change-price">加价幅度：100元</text>
+                  <text class="no-change-price">封顶价：1.5万</text>
+                </view>
+                <view class="num">
+                  <text class="change-num">已出价：36人</text>
+                  <text class="total">总量：100个</text>
+                </view>
+                <view class="operation">
+                  <view class="operation-txt">竞拍</view>
+                  <view class="time">180时43分56秒</view>
+                </view>
+              </view>
+            </repeat>
+            </view>
+          </view>
+          <view style="clear:both;"></view>
+          <view class="mid-banner">
+            <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+              lazy-load="false">
+            </image>
+          </view>
+          <!-- 最新库存 -->
+          <view class="inventory">
+            <text style="margin-left:20rpx;">最新库存</text>
+          </view>
+
+          <view class="goods">
+           <view class="goods-item">
+           <view class="goods-photo">
+              <image src="../../assets/images/2.jpeg" mode="scaleToFill"
+                lazy-load="false">
+              </image>
+              <view class="goods-title">
+                hahahhaha
+              </view>
+            </view>
+            <view class="goods-price">
+              <text>整单一口价</text>
+              <text style="font-size:32rpx;color:#f08619">￥1.20万</text>
+            </view>
+            <view class="goods-num">
+              <text>原价：1.50元</text>
+              <text>单价：100元</text>
+              <text>总量：1000个</text>
+            </view>
+            <view class="goods-addr">
+              <text>货源地:深圳</text>
+            </view>
+            <view class="goods-button">
+              底价直采
+            </view>                    
+           </view>
+          </view>
+        </view>
+      </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy';
+export default class Index extends wepy.page {
+  config = {
+    navigationBarTitleText: '清仓狗'
+  };
+  data = {
+    logo: '../../assets/images/home/logo.png',
+    bannerBgUrl: '../../assets/images/2.jpeg',
+    navList: [
+      {
+        iconUrl: '../../assets/images/home/nav2-1.png',
+        title: '菜单采集'
+      },
+      {
+        iconUrl: '../../assets/images/home/nav6-1.png',
+        title: '底价直采'
+      },
+      {
+        iconUrl: '../../assets/images/home/nav3-1.png',
+        title: '辅料超市'
+      },
+      {
+        iconUrl: '../../assets/images/home/nav7-1.png',
+        title: '担保交易'
+      },
+      {
+        iconUrl: '../../assets/images/home/nav5-1.png',
+        title: '采购信息'
+      }
+    ],
+    menuList: [
+      {
+        bgUrl: '../../assets/images/home/menu1.png',
+        title: '终端产品',
+        value: 480
+      },
+      {
+        bgUrl: '../../assets/images/home/menu2.png',
+        title: '电子元件',
+        value: 480
+      },
+      {
+        bgUrl: '../../assets/images/home/menu3.png',
+        title: '存储器',
+        value: 480
+      },
+      {
+        bgUrl: '../../assets/images/home/menu4.png',
+        title: '连接器',
+        value: 480
+      },
+      {
+        bgUrl: '../../assets/images/home/menu5.png',
+        title: '模组&总成',
+        value: 480
+      },
+      {
+        bgUrl: '../../assets/images/home/menu6.png',
+        title: '二手设备',
+        value: 480
+      }
+    ],
+    recommendItem: [
+      {
+        photo: '../../assets/images/2.jpeg',
+        title: '哈哈哈'
+      },
+      {
+        photo: '../../assets/images/2.jpeg',
+        title: '哈哈哈'
+      },
+      {
+        photo: '../../assets/images/2.jpeg',
+        title: '哈哈哈'
+      }
+    ]
+  };
+  methods = {};
+  events = {};
+  onLoad() {}
+}
+</script>
+
+<style lang="scss" scoped>
+.container {
+  .banner {
+    width: 100%;
+    height: 420rpx;
+    position: relative;
+    .banner-bg {
+      position: absolute;
+      z-index: -999;
+      width: 100%;
+      height: 100%;
+    }
+    .banner-head {
+      display: flex;
+      align-items: center;
+      padding: 20rpx 30rpx;
+      .logo {
+        width: 185rpx;
+        height: 80rpx;
+        .logo-img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .search {
+        width: 100%;
+        height: 56rpx;
+        margin-left: 25rpx;
+        position: relative;
+        .search-icon {
+          position: absolute;
+          top: 50%;
+          margin-top: -19rpx;
+          left: 10rpx;
+          width: 40rpx;
+          height: 40rpx;
+        }
+        .search-input {
+          background-color: rgba(255, 255, 255, 0.7);
+          height: 100%;
+          padding-left: 55rpx;
+          font-size: 26rpx;
+          border-radius: 15rpx;
+        }
+      }
+    }
+  }
+  .body {
+    padding: 20rpx 0;
+    width: 100%;
+    .body-head {
+      .head-nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20rpx;
+        .nav-item {
+          text-align: center;
+
+          image {
+            height: 80rpx;
+            width: 80rpx;
+          }
+          text {
+            display: block;
+            font-size: 26rpx;
+          }
+        }
+      }
+    }
+    .menu {
+      text-align: center;
+      padding: 25rpx 0;
+      .menu-item {
+        display: inline-block;
+        margin: 0 20rpx 20rpx 20rpx;
+        width: 200rpx;
+        height: 100rpx;
+        box-shadow: 1rpx 2rpx 5rpx 3rpx #ccc;
+        border-radius: 10rpx;
+        position: relative;
+        .menu-bg {
+          width: 100%;
+          height: 100%;
+        }
+        .menu-content {
+          position: absolute;
+          text-align: left;
+          top: 10rpx;
+          left: 20rpx;
+          z-index: 999;
+          .title {
+            font-size: 26rpx;
+          }
+          .value {
+            font-size: 20rpx;
+            color: #ccc;
+          }
+        }
+      }
+    }
+    .recommend {
+      padding: 0 20rpx;
+      .recommend-title {
+        text-align: center;
+        margin-bottom: 25rpx;
+        color: #c43f60;
+      }
+      .recommend-content {
+        .image1 {
+          display: flex;
+          height: 450rpx;
+          justify-content: space-between;
+          .image1-left {
+            width: 49%;
+            height: 100%;
+            margin-right: 10rpx;
+          }
+          .image1-right {
+            width: 49%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            image {
+              width: 100%;
+              height: 48.5%;
+            }
+          }
+        }
+        .image2 {
+          margin-top: 10rpx;
+          image {
+            width: 100%;
+            height: 200rpx;
+          }
+        }
+        .image3 {
+          display: flex;
+          width: 100%;
+          height: 200rpx;
+          justify-content: space-between;
+          image {
+            width: 49%;
+            height: 100%;
+          }
+        }
+      }
+
+      // 爆款推荐
+      .hot-recommend {
+        .hot-recommend-head {
+          display: flex;
+          align-items: center;
+          margin: 25rpx 0;
+
+          image {
+            width: 40rpx;
+            height: 40rpx;
+            margin-right: 25rpx;
+          }
+        }
+        .hot-recommend-body {
+          .hot-recommend-item {
+            padding: 12rpx;
+            width: 46%;
+            font-size: 22rpx;
+            .photo {
+              image {
+                width: 100%;
+                height: 230rpx;
+              }
+              .photo-des {
+                color: #333;
+                font-size: 28rpx;
+              }
+            }
+            .price {
+              color: #ccc;
+              padding: 8rpx 0;
+              border-bottom: 1rpx dashed #ccc;
+              .price-num {
+                font-size: 32rpx;
+                color: #f08619;
+              }
+            }
+            .dis-price,
+            .num {
+              color: #ccc;
+              padding: 8rpx 0;
+              display: flex;
+              border-bottom: 1rpx dashed #ccc;
+              justify-content: space-between;
+            }
+            .operation {
+              margin-top: 15rpx;
+              display: flex;
+              justify-content: space-between;
+              .operation-txt {
+                background-color: #f15028;
+                width: 120rpx;
+                text-align: center;
+                color: #fff;
+              }
+              .time {
+                color: #ccc;
+              }
+            }
+          }
+        }
+      }
+      .mid-banner {
+        margin-top: 20rpx;
+        image {
+          width: 100%;
+          height: 250rpx;
+        }
+      }
+      .inventory {
+        background-color: #eeeeee;
+        border-left: 5rpx solid #f08619;
+        font-size: 30rpx;
+        padding: 10rpx 0;
+      }
+      .goods {
+        .goods-item {
+          padding: 25rpx;
+          font-size: 24rpx;
+          color: #ccc;
+          .goods-photo {
+            image {
+              width: 100%;
+              height: 350rpx;
+              border-radius: 20rpx;
+            }
+            .goods-title {
+              color: #333;
+              font-size: 28rpx;
+            }
+          }
+          .goods-price,.goods-num,.goods-addr{
+            border-bottom:1px dashed #ccc;
+            padding:10rpx 0;
+          }
+          .goods-num{
+            display: flex;
+            justify-content: space-between;
+          }
+          .goods-button{
+            margin-top:20rpx;
+            background-color:#f15028;
+            width:120rpx;
+            text-align:center;
+            color:#fff;
+          }
+        }
+      }
+    }
+  }
+}
+</style>
