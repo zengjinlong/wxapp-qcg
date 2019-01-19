@@ -1,20 +1,164 @@
-<style lang="scss" scoped>
-
-</style>
-
-
-<template>
-    <view>
-
+<template lang="wxml">
+    <view style="height:100%;" >
+        <view class="banner-head">
+          <view class="logo">
+            <image class="logo-img" src="../../assets/images/buy/logo.png" mode="scaleToFill"
+              lazy-load="false">
+            </image>
+          </view>
+          <view class="search">
+            <image class="search-icon" src="../../assets/images/home/search.png" mode="scaleToFill"
+              lazy-load="false">
+            </image>
+            <input class="search-input" value="" type="text" placeholder="搜索" placeholder-style="font-size:26rpx;"
+              maxlength="140"></input>
+          </view>
+        </view>
+        <view class="container">
+            <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+                <repeat for="{{navData}}" key="idx" index="idx" item="navItem">
+                    <view class="nav-item {{currentTab == idx ?'active':''}}"  data-current="{{idx}}" @tap="switchNav">
+                        <text class="navtxt {{currentTab == idx ?'active':''}}">{{navItem.text}}</text>
+                    </view>
+                </repeat>        
+            </scroll-view>
+            <!-- 页面内容 -->
+            <swiper class="tab-box" current="{{currentTab}}" duration="300" @change="switchTab"> 
+                <repeat for="{{communityList}}" key="idx" index="idx" item="tabItem">
+                    <swiper-item class="tab-content">
+                       
+                    </swiper-item>
+                </repeat>
+            </swiper>
+        </view>
     </view>
 </template>
 
 <script>
 import wepy from 'wepy';
 export default class Index extends wepy.page {
-    config={};
-    data={};
-    methods={};
-    
+  config = {
+    navigationBarTitleText: '交易中心',
+    navigationBarBackgroundColor: '#df6019',
+    navigationBarTextStyle: 'white',
+    disableScroll: true
+  };
+  data = {
+    motto: 'Hello World',
+    userInfo: {},
+    hasUserInfo: false,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    navData: [
+      {
+        text: '全部'
+      },
+      {
+        text: '我的收藏'
+      },
+    ],
+    currentTab: 0,
+    navScrollLeft: 0
+  };
+  onLoad() {}
+
+  methods = {
+    switchNav(event) {
+      var cur = event.currentTarget.dataset.current;
+      //每个tab选项宽度占1/5
+      var singleNavWidth = this.data.windowWidth / 5;
+      //tab选项居中
+      this.navScrollLeft = (cur - 2) * singleNavWidth;
+      if (this.currentTab == cur) {
+        return false;
+      } else {
+        this.currentTab = cur;
+      }
+    },
+    switchTab(event) {
+      var cur = event.detail.current;
+      var singleNavWidth = this.data.windowWidth / 5;
+      this.currentTab = cur;
+      this.navScrollLeft = (cur - 2) * singleNavWidth;
+    }
+  };
 }
 </script>
+
+
+<style lang="scss" scoped>
+page {
+  width: 100%;
+  height: 100%;
+}
+.container {
+  width: 100%;
+  height: 100%;
+}
+.nav {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #f7f7f7;
+  font-size: 16px;
+  white-space: nowrap;
+  text-align: center;
+}
+.nav-item {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+}
+.nav-item.active {
+  color: #df6019;
+}
+.navtxt.active {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 20rpx 10rpx;
+  border-bottom: 5rpx solid #df6019;
+}
+.tab-box {
+  box-sizing: border-box;
+  background-color: #fff;
+  height: 100%;
+}
+.tab-content {
+  overflow-y: scroll;
+}
+.banner-head {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background-color: #df6019;
+  .logo {
+    width: 185rpx;
+    height: 60rpx;
+    .logo-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .search {
+    width: 100%;
+    height: 56rpx;
+    margin-left: 10rpx;
+    position: relative;
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      margin-top: -19rpx;
+      left: 10rpx;
+      width: 40rpx;
+      height: 40rpx;
+    }
+    .search-input {
+      background-color: rgba(255, 255, 255, 0.7);
+      height: 100%;
+      padding-left: 55rpx;
+      font-size: 26rpx;
+      border-radius: 15rpx;
+    }
+  }
+}
+</style>
+
